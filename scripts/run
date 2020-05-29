@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Non-functional file, example code.
+#exit 1
+
+#./update_ca_certs.sh
+
+# writes: ./kube_config.yaml
+#./build_kube_config.sh
+
+if [ ! -f "kube_config.yaml" ]; then
+  echo "kube_config.yaml doesn't exist. Creating config..."
+  ./build
+fi
+
+if [ -z "${KUBECONFIG}" ]; then
+  echo "KUBECONFIG not defined, setting to default: PWD/kube_config.yaml"
+  export KUBECONFIG=$PWD/kube_config.yaml
+else
+  echo "Using defined KUBECONFIG: ${KUBECONFIG}"
+  if [ ! -f "${KUBECONFIG}" ]; then
+    echo "FATAL: File: ${KUBECONFIG} does not exist."
+    exit 1
+  fi
+fi
+
+docker run --rm -it \
+  -v $KUBECONFIG:/root/.kube/config \
+  -v $PWD/certs:/root/.kube/certs \
+  -v $PWD:/root/kubectl \
+  -v $PWD/.bashrc:/root/.bashrc \
+  -v $PWD/.zshrc:/root/.zshrc \
+  kubectl-manager

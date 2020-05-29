@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Building kube-manager container..."
+docker build -t kube-manager -f Dockerfile .
+
