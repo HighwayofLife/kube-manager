@@ -78,3 +78,15 @@ Problem Statements - what are we trying to solve with this container?
     - I don't have my own kubectl/k9s
     - I care about: Upstream tools (Docker)
 
+Included Tools
+--------------
+
+This repo contains an image build for managing Kubernetes clusters using the following tools:
+* kubectl - Kubernetes CLI tool
+* k9s - Provides a terminal UI to interact with your Kubernetes clusters.
+* kubectx - Kubernetes config context utility
+* kubens - Kubernetes context-namespace utility
+* kubie - Improved and expanded kubectx/ns alternative
+* fluxctl - FluxCD CTL tool
+* kube-ps1 - Kubernetes prompt
+
