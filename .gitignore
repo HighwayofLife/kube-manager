@@ -1,0 +1,8 @@
+*.crt
+*.cert
+.DS_Store
+
+# Ignore generated kube config
+kube_config.yaml
+
+*.swp

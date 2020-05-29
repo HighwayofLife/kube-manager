@@ -10,11 +10,3 @@ alias k=kubectl
 alias ku=kubectl
 alias ctx=kubectx
 alias ns=kubens
-
-certCABundleFile="/usr/local/share/ca-certificates/ca_certs.pem"
-
-if [ -f "${certCABundleFile}" ]; then
-  # Enables Azure CLI to use the cert bundle when making commands/requests
-  export REQUESTS_CA_BUNDLE=$certCABundleFile
-fi
-
