@@ -1,0 +1,20 @@
+clusters:
+  - cluster:
+      certificate-authority: ./certs/<cluster-1-cert-ca.cert>
+      server: https://<cluster-1-ip-or-hostname>
+    name: cluster-1
+  - cluster:
+      certificate-authority: ./certs/<cluster-2-cert-ca.cert>
+      server: https://<cluster-2-ip-or-hostname>
+    name: cluster-2
+  - cluster:
+      certificate-authority: ./certs/<cluster-3-cert-ca.cert>
+      server: https://<cluster-3-ip-or-hostname>
+    name: cluster-3
+auth-provider:
+  config:
+    apiserver-id: <api-server-app-id>
+    client-id: <client-id>
+    environment: AzurePublicCloud
+    tenant-id: <tenant-id>
+  name: azure
