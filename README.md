@@ -1,5 +1,6 @@
-# kubectl
-Kubectl Access to Kubernetes clusters. Generates a kube config from a manifest file.
+# Kube Manager
+Access all of your Kubernetes Clusters with one container of all your favorite Kubernetes CLI tools. Negates the need to configure a workstation or environment to manage clusters. Ease onboarding kubectl access for all of your SRE / DevOps Engineers.
+Allows easy creation of a kube config from a manifest file.
 
 Todo
 ----
@@ -8,23 +9,32 @@ Todo
 - [ ] Expand usage manifest examples
 - [ ] Create k9s base config? -- or persist across containers/sessions
 - [ ] Persist container command history across containers/sessions
+- [ ] Manifest certificates can point to URL, relative path, or absolute path of certificate file that is retrieved (copied) into the local repo.
 
 Installation
 ------------
 
 1. Clone this repo.
-2. Run `make`
-    - This will build the container
-    - Runs the python script inside the container that takes values from `cluster_manifest.yaml` and creates a `kube_config.yaml` in the repo.
-    - Starts a container run session with the loaded `KUBECONFIG` env variable or otherwise the generated `kube_config.yaml`
-3 run `export KUBECONFIG=$PWD:kube_config.yaml:$HOME/.kube/config`
-    - Or some variation of this depending on your needs.
+2. Configure the `cluster_manifest.yaml` file with all the clusters you need access to.
+3. Run `make generate` to generate a `kube_config.yaml` file.
+    - This can be used locally or within the Docker container.
+    - Locally on your workstation using `export KUBECONFIG=$PWD/kube_config.yaml`
+    - Within a Docker container by running `make run`
+
+#### Note:
+You can combine multiple kube configs using the following command:
+```sh
+export KUBECONFIG=$PWD:kube_config.yaml:$HOME/.kube/config
+```
+
+To persist this config across terminal sessions, place the export command in your `.bash_profile` or `.zshrc` file.
 
 Usage
 -----
 
-* Run `make build` to rebuild the container and regenerate the `kube_config.yaml` from the `cluster_manifest.yaml` at any time.
-* Run `make` or `make run` to run the container.
+* Run `make build` to rebuild the container.
+* Run `make generate` to regenerate the `kube_config.yaml` from the `cluster_manifest.yaml` at any time.
+* Run `make run` to run the container.
 
 The container will load in the kube config from the value of the `KUBECONFIG` environment variable if it exists. If not, it will load the generated `kube_config.yaml`. Therefore, you can use any kube config within the kubectl container to manage that cluster.
 
