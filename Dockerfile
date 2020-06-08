@@ -4,7 +4,7 @@ FROM python:3.8.3-alpine3.12
 ARG KUBECTL_VERSION=1.18.3
 
 # https://github.com/derailed/k9s/releases
-ARG K9S_VERSION=0.20.4
+ARG K9S_VERSION=0.20.5
 
 # https://github.com/fluxcd/flux/releases
 ARG FLUXCTL_VERSION=1.19.0
